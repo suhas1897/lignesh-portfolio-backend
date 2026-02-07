@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { mkdir, readFile, rename, writeFile } from 'fs/promises';
@@ -34,6 +35,13 @@ async function writeJsonFile(filename, data) {
 }
 
 const app = express();
+
+// CORS configuration
+app.use(cors({
+  origin: 'https://lignesh-portfolio-jf9jbjobr-suhas-projects-c2a4b70d.vercel.app',
+  credentials: true
+}));
+
 app.use(express.json({ limit: '10mb' }));
 
 app.get('/api/health', (_req, res) => {
